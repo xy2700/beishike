@@ -41,14 +41,14 @@ mock.onPost('/login').reply(config=>{
     })
     
 //注册接口
-    mock.onPost('/test').reply(config => {
-        var reqdata=JSON.parse(config.data).data;
-        UserData.push(reqdata);
-       // Store.set("userList",userList);
-        return [200,{ code: 1,msg:"注册成功"}];
-        // 做一个数据效验
-    });
+   
     
 })
-
+mock.onPost('/regist').reply(config => {
+    var reqdata=JSON.parse(config.data);
+    UserData.push(reqdata);
+   // Store.set("userList",userList);
+    return [200,{ code: 1,msg:"注册成功"}];
+    // 做一个数据效验
+});
 export default axios;

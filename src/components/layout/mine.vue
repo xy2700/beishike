@@ -42,9 +42,7 @@
         <i></i> 收货地址
       </div>
     </div>
-    <div class="mine-tuichu" @click="tui">
-     退出登录
-    </div>
+    <div class="mine-tuichu" @click="tui">退出登录</div>
     <div class="mine-service">
       <p>客服热线：400-627-5757</p>
     </div>
@@ -57,75 +55,79 @@
 export default {
   data() {
     return {
-      jia:false
+      jia: false
     };
   },
   mounted() {
+    if ($.isEmptyObject(this.$store.state.mine)) {
+      this.$router.push({
+  	path:"/",
+})
+    }
   },
   methods: {
-    tui(){
-      this.jia=true
+    tui() {
+      this.jia = true;
     },
-    quandin(){
-      this.$store.state.isLogin=false
-      this.$store.state.mine={}
+    quandin() {
+      this.$store.state.isLogin = false;
+      this.$store.state.mine = {};
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-
 body {
   width: 100%;
   height: 100%;
-   background: rgb(247, 247, 247);
+  background: rgb(247, 247, 247);
   .mine {
     .jiaru {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: rgba(30, 28, 28, 0.8);
-    z-index: 100;
-    .jiaru-cont {
-      width: r(580);
-      background: #fff;
-      position: absolute;
-      left: 50%;
-      top: 30%;
-      transform: translateX(-50%) translateY(-30%);
-      .text {
-        margin: 0 r(48) r(114);
-        padding-top: r(80);
-        font-size: r(30);
-        text-align: center;
-      }
-      .kang,
-      .go {
-        float: left;
-        width: 50%;
-        text-align: center;
-        font-size: r(30);
-        margin-bottom: r(30);
-        color: #ccc;
-      }
-      .go {
-        border-left: r(2) solid #ccc;
-        a {
-          text-decoration: none;
-          color: #02d3d6;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: rgba(30, 28, 28, 0.8);
+      z-index: 100;
+      .jiaru-cont {
+        width: r(580);
+        background: #fff;
+        position: absolute;
+        left: 50%;
+        top: 30%;
+        transform: translateX(-50%) translateY(-30%);
+        .text {
+          margin: 0 r(48) r(114);
+          padding-top: r(80);
+          font-size: r(30);
+          text-align: center;
+        }
+        .kang,
+        .go {
+          float: left;
+          width: 50%;
+          text-align: center;
+          font-size: r(30);
+          margin-bottom: r(30);
+          color: #ccc;
+        }
+        .go {
+          border-left: r(2) solid #ccc;
+          a {
+            text-decoration: none;
+            color: #02d3d6;
+          }
         }
       }
     }
-  }
     background: rgb(247, 247, 247);
     .mine-head {
       background: #fff;
       margin-top: r(80);
       .head-img {
         position: relative;
-          height: r(190);
+        height: r(190);
         img {
           position: absolute;
           left: 50%;
@@ -134,40 +136,41 @@ body {
           width: r(160);
         }
       }
-      .head-name{
+      .head-name {
         text-align: center;
       }
     }
-    .mine-info{
-       background: #fff;
-      display:flex;
+    .mine-info {
+      background: #fff;
+      display: flex;
       justify-content: space-around;
       text-align: center;
       padding: r(64) 0 r(30);
-      .info-a{
-        .top{
+      .info-a {
+        .top {
           color: #ccc;
         }
-        .bottom{
+        .bottom {
           font-size: r(30);
         }
       }
     }
-    .mine-order{
+    .mine-order {
       margin-top: r(30);
-       background: #fff;
-       .dindang,.dizhi{
+      background: #fff;
+      .dindang,
+      .dizhi {
         font-size: r(32);
-        line-height:r(50); 
+        line-height: r(50);
         margin-left: r(30);
-        padding:r(30) 0;
-       }
-       .dizhi{
-         border-top: r(1) solid #ccc;
-       }
+        padding: r(30) 0;
+      }
+      .dizhi {
+        border-top: r(1) solid #ccc;
+      }
     }
-    .mine-tuichu{
-      margin-top:r(30);
+    .mine-tuichu {
+      margin-top: r(30);
       background: #fff;
       height: r(100);
       text-align: center;
@@ -175,12 +178,12 @@ body {
       font-size: r(30);
       color: red;
     }
-    .mine-service{
+    .mine-service {
       margin-top: r(268);
       text-align: center;
       color: #999;
     }
-    .mine-protocol{
+    .mine-protocol {
       margin-top: r(74);
       text-align: center;
       padding-bottom: r(120);

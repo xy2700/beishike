@@ -1,7 +1,7 @@
 <template>
   <!-- 登录注册 -->
   <div class="user">
-    <mt-popup v-model="bln1">请稍等...</mt-popup>
+    <mt-popup v-model="bln1">{{cont}}</mt-popup>
     <div class="user-cont">
       <div class="ret">
         <i @click="bool"></i>
@@ -31,25 +31,25 @@
 
         <div>
           <p>账号</p>
-          <input type="text" name="uname">
+          <input type="text" v-model="uname">
         </div>
         <div>
           <p>
             密码
             <i>显示</i>
           </p>
-          <input type="passw" name="upwd">
+          <input type="password" v-model="upwd">
         </div>
         <div>
           <p>
             确认密码
             <i>显示</i>
           </p>
-          <input type="password" name="upwd">
+          <input type="password" v-model="upwd1">
         </div>
         <div class="btn">
           <span @click="bln=true">切换快速登录</span>
-          <button>></button>
+          <button @click="regist">></button>
         </div>
       </div>
     </div>
@@ -69,21 +69,25 @@ export default {
       bln: true,
       username: "",
       password: "",
+      uname: "",
+      upwd: "",
+      upwd1: "",
       tes: false,
-      title: ""
+      title: "",
+      cont: "请稍等..."
     };
   },
   methods: {
-  
     cut() {
       this.bln = false;
-      this.empty()
+      this.empty();
     },
     bool() {
       this.$eventHub.$emit("sub", { bools: false });
     },
     go(e) {
       this.bln1 = true;
+      this.cont = "请稍等...";
       if (this.username.trim() == "" || this.password.trim() == "") {
         this.title = "接头暗号错误，请重新输入帐号或密码:-)";
         $(".user").css("background", "#F05B5B");
@@ -98,20 +102,20 @@ export default {
       };
 
       this.$apis.mokeLogin(data).then(res => {
-        console.log(res)
         if (res.data.code == 500) {
-          this.title =res.data.msg;
+          this.title = res.data.msg;
           $(".user").css("background", "#F05B5B");
           $(e.target).css("color", "#F05B5B");
+
           this.tes = true;
           this.bln1 = false;
         } else if (res.data.code == 200) {
-        this.$store.state.mine=JSON.parse(res.config.data)
-         this.empty()
+          this.$store.state.mine = JSON.parse(res.config.data);
+          this.empty();
           this.bln1 = false;
           this.$store.state.isLogin = true;
           this.$eventHub.$emit("sub", { bools: false });
-          Store.set("user",res.data.data)
+
           this.$router.push({
             path: "/mine"
           });
@@ -126,6 +130,45 @@ export default {
       this.username = "";
       this.password = "";
       this.tes = false;
+    },
+    regist() {
+       if (this.upwd=='' || this.uname=="") {
+         this.bln1 = true;
+        this.cont = "用户名或密码不能为空";
+        setTimeout(() => {
+          this.bln1 = false;
+        }, 200);
+         return
+       }
+      if (this.upwd1 != this.upwd) {
+        this.bln1 = true;
+        this.cont = "两次密码不一致";
+        setTimeout(() => {
+          this.bln1 = false;
+        }, 200);
+        return;
+      }
+      var data = {
+        id:Number(new Date()),
+        username: this.uname,
+        password: this.upwd
+      };
+      console.log(data)
+      this.$apis.mokeRegist(data).then(res => {
+        if (res.status == 200) {
+          this.bln1 = true;
+          this.cont = "注册成功";
+          setTimeout(() => {
+            this.uname = "";
+            this.upwd = "";
+            this.upwd1 = "";
+            this.bln1 = false;
+            this.bln = true;
+          }, 200);
+
+          return;
+        }
+      });
     }
   },
   mounted() {}

@@ -13,5 +13,8 @@ class Apls{
     mokeLogin(data){
         return axios.post("/login",data)
     }
+    mokeRegist(data){
+        return axios.post("/regist",data)
+    }
 }
 export default new Apls();
