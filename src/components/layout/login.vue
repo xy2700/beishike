@@ -153,7 +153,6 @@ export default {
         username: this.uname,
         password: this.upwd
       };
-      console.log(data)
       this.$apis.mokeRegist(data).then(res => {
         if (res.status == 200) {
           this.bln1 = true;
