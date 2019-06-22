@@ -420,21 +420,21 @@ export default {
             this.configware = config["pc"]["configware"];
             this.configtips = config["pc"]["configtips"];
             this.info["price"] = ele.CurrentPrice;
-            this.num=1
+           // this.num=1
           }
         });
       } else if (item.type == "jz") {
         this.list.forEach(ele => {
           if (ele.ID == item.id) {
             this.info["price"] = ele.CurrentPrice;
-            this.num=1
+           // this.num=1
           }
         });
       } else if (item.type == "cak") {
         this.list[0].forEach(ele => {
           if (ele.Id == item.id) {
             this.info["price"] = ele.CurrentPrice;
-            this.num=1
+            //this.num=1
           }
         });
         this.config.forEach((ele, ind) => {
@@ -443,14 +443,14 @@ export default {
             this.configpeople = ele.people;
             this.configware = ele.ware;
             this.configtips = ele.tips;
-            this.num=1
+           // this.num=1
           }
         });
       } else {
         this.list.forEach(ele => {
           if (ele.ID == item.id) {
             this.info["price"] = ele.CurrentPrice;
-            this.num=1
+            //this.num=1
           }
         });
       }
